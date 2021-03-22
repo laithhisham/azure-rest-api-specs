@@ -1,0 +1,316 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Insights",
+    "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
+    "version": "2021-03-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/definitions/{sentinelDefinitionName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get Sentinel definition": {
+            "$ref": "./examples/definitions/GetSentinelDefinition.json"
+          }
+        },
+        "tags": [
+          "SentinelDefinition"
+        ],
+        "description": "Get Sentinel definition",
+        "operationId": "SentinelDefinition_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/SentinelDefinitionName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SentinelDefinition"
+            }
+          },
+          "default": {
+            "description": "Error in getting the Sentinel definition",
+            "schema": {
+              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete Sentinel definition": {
+            "$ref": "./examples/definitions/DeleteSentinelDefinition.json"
+          }
+        },
+        "tags": [
+          "SentinelDefinition"
+        ],
+        "description": "Delete Sentinel definition",
+        "operationId": "SentinelDefinition_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/SentinelDefinitionName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error in deleting the Sentinel definition",
+            "schema": {
+              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Create Sentinel Defintion": {
+            "$ref": "./examples/definitions/CreateSentinelDefinition.json"
+          }
+        },
+        "tags": [
+          "SentinelDefinition"
+        ],
+        "description": "Create or Update Sentinel definition",
+        "operationId": "SentinelDefinition_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/SentinelDefinitionName"
+          },
+          {
+            "$ref": "#/parameters/SentinelDefinitionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SentinelDefinition"
+            }
+          },
+          "default": {
+            "description": "Error in creating or updating the Sentinel definition",
+            "schema": {
+              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "EntityAnalyticsSetting": {
+      "description": "Entity analytics setting values",
+      "properties": {
+        "enabled": {
+          "description": "Flag that indicates the status of the EntityAnalytics setting",
+          "type": "boolean"
+        },
+        "uebaDataSources": {
+          "description": "The data source be profiled by ueba engine",
+          "items": {
+            "$ref": "#/definitions/UebaDataSources"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "UebaDataSources": {
+      "description": "The data source enriched by ueba",
+      "enum": [
+        "AuditLogs",
+        "AzureActivity",
+        "SecurityEvent",
+        "SigninLogs"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "UebaDataSources"
+      }
+    },
+    "Sku": {
+      "description": "The pricing tier of the solution",
+      "properties": {
+        "name": {
+          "description": "The kind of the tier",
+          "enum": [
+            "PerGB",
+            "CapacityReservation"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "SkuKind"
+          }
+        },
+        "capacityReservationLevel": {
+          "description": "The amount of reservation level",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "SentinelDefinition": {
+      "description": "Sentinel definition",
+      "properties": {
+        "customerManagedKey": {
+          "description": "Flag that indicates the status of the CMK setting",
+          "type": "boolean"
+        },
+        "eyesOn": {
+          "description": "Flag that indicates the status of the EyesOn setting",
+          "type": "boolean"
+        },
+        "sku": {
+          "description": "The pricing tier of the solution",
+          "$ref": "#/definitions/Sku"
+        },
+        "entityAnalytics": {
+          "description": "Entity analytics setting object",
+          "$ref": "#/definitions/EntityAnalyticsSetting",
+          "type": "object"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "parameters": {
+    "SubscriptionId": {
+      "description": "Azure subscription ID",
+      "in": "path",
+      "name": "subscriptionId",
+      "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$",
+      "required": true,
+      "type": "string"
+    },
+    "ResourceGroupName": {
+      "description": "The name of the resource group within the user's subscription. The name is case insensitive.",
+      "in": "path",
+      "maxLength": 90,
+      "minLength": 1,
+      "name": "resourceGroupName",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "WorkspaceName": {
+      "description": "The name of the workspace.",
+      "in": "path",
+      "name": "workspaceName",
+      "maxLength": 90,
+      "minLength": 1,
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "OperationalInsightsResourceProvider": {
+      "description": "The namespace of workspaces resource provider- Microsoft.OperationalInsights.",
+      "in": "path",
+      "name": "operationalInsightsResourceProvider",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SentinelDefinitionName": {
+      "description": "The sentinel definition name. Supports - default",
+      "in": "path",
+      "name": "sentinelDefinitionName",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SentinelDefinitionParameter": {
+      "description": "The Sentinel definition parameter",
+      "in": "body",
+      "name": "sentinelDefinitionParameter",
+      "required": false,
+      "schema": {
+        "$ref": "#/definitions/SentinelDefinition"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
