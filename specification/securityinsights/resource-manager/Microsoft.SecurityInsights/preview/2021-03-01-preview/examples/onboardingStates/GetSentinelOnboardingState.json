@@ -5,10 +5,13 @@
     "resourceGroupName": "myRg",
     "workspaceName": "myWorkspace",
     "operationalInsightsResourceProvider": "Microsoft.OperationalInsights",
-    "sentinelDefinitionName": "default"
+    "SentinelOnboardingStateName": "default"
   },
   "responses": {
-    "200": {},
-    "204": {}
+    "200": {
+      "body": {
+        "customerManagedKey": false
+      }
+    }
   }
 }

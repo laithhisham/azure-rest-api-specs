@@ -34,18 +34,18 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/definitions/{sentinelDefinitionName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/onboardingStates/{sentinelOnboardingStateName}": {
       "get": {
         "x-ms-examples": {
-          "Get Sentinel definition": {
-            "$ref": "./examples/definitions/GetSentinelDefinition.json"
+          "Get Sentinel onboarding state": {
+            "$ref": "./examples/onboardingStates/GetSentinelOnboardingState.json"
           }
         },
         "tags": [
-          "SentinelDefinition"
+          "SentinelOnboardingState"
         ],
-        "description": "Get Sentinel definition",
-        "operationId": "SentinelDefinition_Get",
+        "description": "Get Sentinel onboarding state",
+        "operationId": "SentinelOnboardingState_Get",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -63,18 +63,73 @@
             "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
           },
           {
-            "$ref": "#/parameters/SentinelDefinitionName"
+            "$ref": "#/parameters/SentinelOnboardingStateName"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SentinelDefinition"
+              "$ref": "#/definitions/SentinelOnboardingState"
             }
           },
           "default": {
-            "description": "Error in getting the Sentinel definition",
+            "description": "Error in getting the Sentinel onboarding state",
+            "schema": {
+              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Create Sentinel Defintion": {
+            "$ref": "./examples/onboardingStates/CreateSentinelOnboardingState.json"
+          }
+        },
+        "tags": [
+          "SentinelOnboardingState"
+        ],
+        "description": "Create Sentinel onboarding state",
+        "operationId": "SentinelOnboardingState_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/SentinelOnboardingStateName"
+          },
+          {
+            "$ref": "#/parameters/SentinelOnboardingStateParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SentinelOnboardingState"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/SentinelOnboardingState"
+            }
+          },
+          "default": {
+            "description": "Error in creating the Sentinel onboarding state",
             "schema": {
               "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
             }
@@ -83,15 +138,15 @@
       },
       "delete": {
         "x-ms-examples": {
-          "Delete Sentinel definition": {
-            "$ref": "./examples/definitions/DeleteSentinelDefinition.json"
+          "Delete Sentinel onboarding state": {
+            "$ref": "./examples/onboardingStates/DeleteSentinelOnboardingState.json"
           }
         },
         "tags": [
-          "SentinelDefinition"
+          "SentinelOnboardingState"
         ],
-        "description": "Delete Sentinel definition",
-        "operationId": "SentinelDefinition_Delete",
+        "description": "Delete Sentinel onboarding state",
+        "operationId": "SentinelOnboardingState_Delete",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -109,7 +164,7 @@
             "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
           },
           {
-            "$ref": "#/parameters/SentinelDefinitionName"
+            "$ref": "#/parameters/SentinelOnboardingStateName"
           }
         ],
         "responses": {
@@ -120,56 +175,7 @@
             "description": "No Content"
           },
           "default": {
-            "description": "Error in deleting the Sentinel definition",
-            "schema": {
-              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
-            }
-          }
-        }
-      },
-      "put": {
-        "x-ms-examples": {
-          "Create Sentinel Defintion": {
-            "$ref": "./examples/definitions/CreateSentinelDefinition.json"
-          }
-        },
-        "tags": [
-          "SentinelDefinition"
-        ],
-        "description": "Create or Update Sentinel definition",
-        "operationId": "SentinelDefinition_Update",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../common/1.0/types.json#/parameters/OperationalInsightsResourceProvider"
-          },
-          {
-            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
-          },
-          {
-            "$ref": "#/parameters/SentinelDefinitionName"
-          },
-          {
-            "$ref": "#/parameters/SentinelDefinitionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/SentinelDefinition"
-            }
-          },
-          "default": {
-            "description": "Error in creating or updating the Sentinel definition",
+            "description": "Error in deleting the Sentinel onboarding state",
             "schema": {
               "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
             }
@@ -179,78 +185,12 @@
     }
   },
   "definitions": {
-    "EntityAnalyticsSetting": {
-      "description": "Entity analytics setting values",
-      "properties": {
-        "enabled": {
-          "description": "Flag that indicates the status of the EntityAnalytics setting",
-          "type": "boolean"
-        },
-        "uebaDataSources": {
-          "description": "The data source be profiled by ueba engine",
-          "items": {
-            "$ref": "#/definitions/UebaDataSources"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "UebaDataSources": {
-      "description": "The data source enriched by ueba",
-      "enum": [
-        "AuditLogs",
-        "AzureActivity",
-        "SecurityEvent",
-        "SigninLogs"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "modelAsString": true,
-        "name": "UebaDataSources"
-      }
-    },
-    "Sku": {
-      "description": "The pricing tier of the solution",
-      "properties": {
-        "name": {
-          "description": "The kind of the tier",
-          "enum": [
-            "PerGB",
-            "CapacityReservation"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "SkuKind"
-          }
-        },
-        "capacityReservationLevel": {
-          "description": "The amount of reservation level",
-          "type": "integer",
-          "format": "int32"
-        }
-      }
-    },
-    "SentinelDefinition": {
-      "description": "Sentinel definition",
+    "SentinelOnboardingState": {
+      "description": "Sentinel onboarding state",
       "properties": {
         "customerManagedKey": {
           "description": "Flag that indicates the status of the CMK setting",
           "type": "boolean"
-        },
-        "eyesOn": {
-          "description": "Flag that indicates the status of the EyesOn setting",
-          "type": "boolean"
-        },
-        "sku": {
-          "description": "The pricing tier of the solution",
-          "$ref": "#/definitions/Sku"
-        },
-        "entityAnalytics": {
-          "description": "Entity analytics setting object",
-          "$ref": "#/definitions/EntityAnalyticsSetting",
-          "type": "object"
         }
       },
       "type": "object"
@@ -294,21 +234,21 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "SentinelDefinitionName": {
-      "description": "The sentinel definition name. Supports - default",
+    "SentinelOnboardingStateName": {
+      "description": "The Sentinel onboarding state name. Supports - default",
       "in": "path",
-      "name": "sentinelDefinitionName",
+      "name": "sentinelOnboardingStateName",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "SentinelDefinitionParameter": {
-      "description": "The Sentinel definition parameter",
+    "SentinelOnboardingStateParameter": {
+      "description": "The Sentinel onboarding state parameter",
       "in": "body",
-      "name": "sentinelDefinitionParameter",
+      "name": "sentinelOnboardingStateParameter",
       "required": false,
       "schema": {
-        "$ref": "#/definitions/SentinelDefinition"
+        "$ref": "#/definitions/SentinelOnboardingState"
       },
       "x-ms-parameter-location": "method"
     }
